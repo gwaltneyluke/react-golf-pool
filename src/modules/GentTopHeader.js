@@ -6,9 +6,9 @@ function GentLeaderboard(props) {
       <table class='row column leaderboard-header-table'>
         <tbody>
           <tr>
-            <td>Pos</td>
-            <td>Gentlemen</td>
-            <td>Score</td>
+            <td class='position-column'>Pos</td>
+            <td class='name-column'>Gentlemen</td>
+            <td class='score-column'>Score</td>
           </tr>
         </tbody>
       </table>

@@ -48,47 +48,47 @@ table.leaderboard-table td, th {
   color: var(--primary-color);
 }
 
-.leaderboard-table th[scope='top'] {
+table.leaderboard-table th {
   background-color: var(--accent-color);
-  position: --webkit-sticky;
   position: sticky;
-  left: 1;
-  top: 1;
+}
+
+table.leaderboard-table th[scope='top'] {
+  top: 0;
+  left: 0;
   z-index: 3;
 }
 
-.leaderboard-table th[scope='column'] {
-  background-color: var(--accent-color);
-  position: --webkit-sticky;
-  position: sticky;
-  top: 1;
+table.leaderboard-table th[scope='row'] {
+  left: 0;
   z-index: 2;
 }
 
-.leaderboard-table th[scope='row'] {
-  background-color: var(--accent-color);
-  position: --webkit-sticky;
-  position: sticky;
-  left: 1;
+table.leaderboard-table th[scope='column'] {
+  top: 0;
   z-index: 1;
 }
 
-table.leaderboard-table th[scope='column'], th[scope='column'] > table {
-  width: 150px;
+.player-column-table {
+  width: 300px;
 }
 
 table.leaderboard-table th[scope='top'], th[scope='row'] {
-  width: 270px;
+  width: 240px;
 }
 
-.leaderboard-header-table.row tr > td:nth-child(1) {
-  width: 60px;
+.position-column {
+  width: 30px;
 }
 
-.leaderboard-header-table.row tr > td:nth-child(2) {
+.name-column {
   width: 150px;
 }
 
-.leaderboard-header-table.row tr > td:nth-child(3) {
+.score-column {
+  width: 60px;
+}
+
+.chip-column {
   width: 60px;
 }

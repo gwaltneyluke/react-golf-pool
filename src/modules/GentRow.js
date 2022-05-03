@@ -9,22 +9,22 @@ function GentRow({ gent }) {
         <table class='row leaderboard-header-table'>
           <tbody>
             <tr>
-              <td>{position}</td>
-              <td>{name}</td>
-              <td>{score}</td>
+              <td class='position-column'>{position}</td>
+              <td class='name-column'>{name}</td>
+              <td class='score-column'>{score}</td>
             </tr>
           </tbody>
         </table>
       </th>
       {picks.map(pick => (
         <td>
-          <table>
+          <table class='player-column-table'>
             <tbody>
               <tr>
-                <td>{pick.playerPosition}</td>
-                <td>{pick.playerName}</td>
-                <td>{pick.playerScore}</td>
-                <td>{pick.chips}</td>
+                <td class='position-column'>{pick.playerPosition}</td>
+                <td class='name-column'>{pick.playerName}</td>
+                <td class='score-column'>{pick.playerScore}</td>
+                <td class='chips-column'>{pick.chips}</td>
               </tr>
             </tbody>
           </table>
