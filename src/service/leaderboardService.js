@@ -29,7 +29,7 @@ const getLeaderboard = () => {
 }
 
 const _getGentScoreReducer = (prevScore, currPick) => {
-  if (currPick.playerPosition >= 3) {
+  if (currPick.playerPosition <= 3) {
     return prevScore + currPick.chips;
   }
   return prevScore;
