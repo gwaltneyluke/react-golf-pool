@@ -1,8 +1,21 @@
 import { faker } from '@faker-js/faker';
 
+const getPlayers = () => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(Array.from(Array(mockPlayerNames.length).keys())
+              .map(_createMockPlayer))
+    }, 2000);
+  });
+}
+
 const getMockPlayers = () => {
-  return Array.from(Array(mockPlayerNames.length).keys())
-          .map(_createMockPlayer);
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(Array.from(Array(mockPlayerNames.length).keys())
+              .map(_createMockPlayer))
+    }, 2000);
+  });
 }
 
 const _createMockPlayer = (index) => {
@@ -52,6 +65,7 @@ const mockPlayerNames = [
 ]
 
 export {
+  getPlayers,
   getMockPlayers,
   mockPlayerNames
 }

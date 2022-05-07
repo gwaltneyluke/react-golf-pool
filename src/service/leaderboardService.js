@@ -1,9 +1,9 @@
-import { getMockGents } from "./gentService";
-import { getMockPlayers } from "./playerService";
+import { getGents, getMockGents } from "./gentService";
+import { getPlayers, getMockPlayers } from "./playerService";
 
-const getLeaderboard = () => {
-  const gents = getMockGents();
-  const players = getMockPlayers();
+const getLeaderboard = async () => {
+  const gents = await _getGents();
+  const players = await _getPlayers();
 
   const leaderboard = gents.map(gent => {
     const gentPicks = gent.picks.map(pick => {
@@ -28,11 +28,21 @@ const getLeaderboard = () => {
   return _orderLeaderboard(leaderboard);
 }
 
+const _getGents = () => {
+  const isLocal = process.env.IS_LOCAL === 'true';
+  return isLocal ? getMockGents() : getGents();
+}
+
 const _getGentScoreReducer = (prevScore, currPick) => {
   if (currPick.playerPosition <= 3) {
     return prevScore + currPick.chips;
   }
   return prevScore;
+}
+
+const _getPlayers = () => {
+  const isLocal = process.env.IS_LOCAL === 'true';
+  return isLocal ? getMockPlayers() : getPlayers();
 }
 
 const _orderLeaderboard = (leaderboard) => {

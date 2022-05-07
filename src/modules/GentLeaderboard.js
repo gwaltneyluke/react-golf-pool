@@ -1,26 +1,29 @@
 import React, { useState, useEffect } from 'react';
 
-import GentTopHeader from './GentTopHeader';
 import GentColumnHeader from './GentColumnHeader';
+import GentsLoading from './GentsLoading';
 import GentRow from './GentRow';
+import GentTopHeader from './GentTopHeader';
 
 import { getLeaderboard } from '../service/leaderboardService';
 
 function GentLeaderboard(props) {
   const [ leaderboard, setLeaderboard ] = useState([]);
   const [ pickNumbers, setPickNumbers ] = useState([]);
+  const [ isLoading, setIsLoading ] = useState(true);
 
   useEffect(() => {
-    const fetchLeaderboard = () => {
-      const board = getLeaderboard();
+    const fetchLeaderboard = async () => {
+      const board = await getLeaderboard();
       setLeaderboard(board);
       setPickNumbers(_getPickNumbers(board));
+      setIsLoading(false);
     }
 
     fetchLeaderboard();
   }, []);
 
-  return (
+  return isLoading ? (<GentsLoading />) : (
     <div class='leaderboard-container'>
       <table class='leaderboard-table'>
         <thead>

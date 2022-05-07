@@ -5,10 +5,20 @@ import { mockPlayerNames } from './playerService';
 const numberOfMockGents = 30;
 const numberOfMockPicks = 10;
 
+const getGents = () => {
+	return new Promise((resolve, _) => {
+		resolve(Array(numberOfMockGents)
+				.fill(null)
+				.map(_createMockGent));
+	});
+}
+
 const getMockGents = () => {
-	return Array(numberOfMockGents)
-					.fill(null)
-					.map(_createMockGent);
+	return new Promise((resolve, _) => {
+		resolve(Array(numberOfMockGents)
+				.fill(null)
+				.map(_createMockGent));
+	});
 }
 
 const _createMockGent = () => {
@@ -28,5 +38,6 @@ const _createMockPick = () => {
 };
 
 export {
+	getGents,
 	getMockGents
 }
