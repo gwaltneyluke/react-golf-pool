@@ -22,7 +22,7 @@ html, body, div#root, div.App {
   width: 90%;
 }
 
-.login-button {
+.login-button, .make-picks-button {
   background-color: var(--accent-color);
   color: var(--primary-color);
   float: right;
