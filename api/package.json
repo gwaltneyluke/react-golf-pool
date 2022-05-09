@@ -1,0 +1,11 @@
+{
+  "name": "golf-pool-api",
+  "version": "1.0.0",
+  "description": "an API Gateway / Lambda based API for the react-golf-pool",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

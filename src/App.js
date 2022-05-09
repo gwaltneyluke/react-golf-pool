@@ -1,13 +1,9 @@
 import './App.css';
-import GentLeaderboard from './modules/GentLeaderboard';
+import PageLayout from './modules/PageLayout';
 
 function App() {
   return (
-    <div className="App">
-      <h1 class='title'>Hello, friends</h1>
-      <GentLeaderboard />
-      <div class='x-space'></div>
-    </div>
+    <PageLayout />
   );
 }
 
