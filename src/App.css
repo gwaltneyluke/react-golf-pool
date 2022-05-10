@@ -2,6 +2,7 @@
   --primary-color: green;
   --secondary-color: white;
   --accent-color: yellow;
+  --button-hover-color: rgb(255, 255, 150);
 }
 
 * {
@@ -27,13 +28,24 @@ html, body, div#root, div.App {
   flex: 1 1 33%;
 }
 
-button.top-bar-button {
+.top-bar-button {
   background-color: var(--accent-color);
+  border: none;
+  border-radius: 5px;
   color: var(--primary-color);
+  cursor: pointer;
   float: right;
   padding: 10px 30px;
   font-size: 15px;
   font-weight: bold;
+}
+
+.top-bar-button:hover {
+  background-color: var(--button-hover-color)
+}
+
+.top-bar-button:active {
+  background-color: var(--secondary-color);
 }
 
 .leaderboard-container {
