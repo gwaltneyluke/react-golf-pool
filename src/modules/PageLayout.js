@@ -16,22 +16,16 @@ function PageLayout() {
 
     return (
         <div class='App'>
-            <table class='title-and-login-bar'>
-                <tbody>
-                    <tr>
-                        <td></td>
-                        <td>
-                            <h1 class='title'>Hello, friends</h1>
-                        </td>
-                        <td>
-                            {user.signedIn ? 
-                                (<button class='make-picks-button'>Make Picks</button>) :
-                                (<button class='login-button' onClick={handleLoginClick}>Login</button>)
-                            }
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <span class='top-bar'>
+                <div class='top-bar-element'></div>
+                <h1 class='top-bar-element title'>Hello, friends</h1>
+                <div class='top-bar-element'>
+                    {user.signedIn ? 
+                        (<button class='top-bar-button'>Make Picks</button>) :
+                        (<button class='top-bar-button' onClick={handleLoginClick}>Login</button>)
+                    }
+                </div>
+            </span>
             <GentLeaderboard />
         </div>
     )

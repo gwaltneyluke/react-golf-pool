@@ -5,7 +5,7 @@
 }
 
 * {
-  font-family: serif;
+  font-family: 'Dosis', sans-serif;
   text-align: center;
   color: var(--secondary-color);
 }
@@ -15,14 +15,19 @@ html, body, div#root, div.App {
   height: 100%;
 }
 
-.title-and-login-bar {
-  margin-left: auto;
-  margin-right: auto;
-  table-layout: fixed;
+.top-bar {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
   width: 90%;
 }
 
-.login-button, .make-picks-button {
+.top-bar-element {
+  flex: 1 1 33%;
+}
+
+button.top-bar-button {
   background-color: var(--accent-color);
   color: var(--primary-color);
   float: right;
