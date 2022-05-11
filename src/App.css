@@ -2,7 +2,7 @@
   --primary-color: green;
   --secondary-color: white;
   --accent-color: yellow;
-  --button-hover-color: rgb(255, 255, 150);
+  --hover-color: rgb(255, 255, 150);
 }
 
 * {
@@ -41,7 +41,7 @@ html, body, div#root, div.App {
 }
 
 .top-bar-button:hover {
-  background-color: var(--button-hover-color)
+  background-color: var(--hover-color)
 }
 
 .top-bar-button:active {
@@ -75,6 +75,10 @@ table.leaderboard-table > tbody > tr > th,
 table.leaderboard-table > tbody > tr > td {
   border: 1px solid var(--primary-color);
   border-collapse: collapse;
+}
+
+table.leaderboard-table > tbody > tr:hover {
+  background-color: var(--hover-color);
 }
 
 table.leaderboard-table td, th {
