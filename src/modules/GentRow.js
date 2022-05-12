@@ -6,25 +6,25 @@ function GentRow({ gent }) {
   return (
     <tr>
       <th scope='row'>
-        <table class='row leaderboard-header-table'>
+        <table className='row leaderboard-header-table'>
           <tbody>
             <tr>
-              <td class='position-column'>{position}</td>
-              <td class='name-column'>{name}</td>
-              <td class='score-column'>{score}</td>
+              <td className='position-column'>{position}</td>
+              <td className='name-column'>{name}</td>
+              <td className='score-column'>{score}</td>
             </tr>
           </tbody>
         </table>
       </th>
-      {picks.map(pick => (
-        <td>
-          <table class='player-column-table'>
+      {picks.map((pick, idx) => (
+        <td key={`gent-${name}-pick-${idx}`}>
+          <table className='player-column-table'>
             <tbody>
               <tr>
-                <td class='position-column'>{pick.playerPosition}</td>
-                <td class='name-column'>{pick.playerName}</td>
-                <td class='score-column'>{pick.playerScore}</td>
-                <td class='chips-column'>{pick.chips}</td>
+                <td className='position-column'>{pick.playerPosition}</td>
+                <td className='name-column'>{pick.playerName}</td>
+                <td className='score-column'>{pick.playerScore}</td>
+                <td className='chips-column'>{pick.chips}</td>
               </tr>
             </tbody>
           </table>

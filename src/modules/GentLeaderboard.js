@@ -24,19 +24,19 @@ function GentLeaderboard(props) {
   }, []);
 
   return isLoading ? (<GentsLoading />) : (
-    <div class='leaderboard-container'>
-      <table class='leaderboard-table'>
+    <div className='leaderboard-container'>
+      <table className='leaderboard-table'>
         <thead>
           <tr>
             <GentTopHeader />
             {pickNumbers.map(playerNumber => (
-              <GentColumnHeader playerNumber={playerNumber}/>
+              <GentColumnHeader key={`gent-column-header-player-${playerNumber}`} playerNumber={playerNumber}/>
             ))}
           </tr>
         </thead>
-        <tbody class='leaderboard-table-body'>
-          {leaderboard.map(gent => (
-            <GentRow gent={gent} />
+        <tbody className='leaderboard-table-body'>
+          {leaderboard.map((gent, idx) => (
+            <GentRow key={`gent-row-${idx}`} gent={gent} />
           ))}
         </tbody>
       </table>

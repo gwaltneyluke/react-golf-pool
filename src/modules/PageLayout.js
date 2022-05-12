@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import GentLeaderboard from './GentLeaderboard';
+import MakePicksForm from './MakePicksForm';
 
 const defaultUser = {
     signedIn: false
@@ -7,6 +8,7 @@ const defaultUser = {
 
 function PageLayout() {
     const [ user, setUser ] = useState(defaultUser)
+    const [ makePicksVisible, setMakePicksVisible ] = useState(false)
     
     const handleLoginClick = () => {
         setUser({
@@ -14,18 +16,23 @@ function PageLayout() {
         })
     }
 
+    const handleMakePicksClick = () => {
+        setMakePicksVisible(true);
+    }
+
     return (
-        <div class='App'>
-            <span class='top-bar'>
-                <div class='top-bar-element'></div>
-                <h1 class='top-bar-element title'>Hello, friends</h1>
-                <div class='top-bar-element'>
+        <div className='App'>
+            <span className='top-bar'>
+                <div className='top-bar-element'></div>
+                <h1 className='top-bar-element title'>Hello, friends</h1>
+                <div className='top-bar-element'>
                     {user.signedIn ? 
-                        (<button class='top-bar-button'>Make Picks</button>) :
-                        (<button class='top-bar-button' onClick={handleLoginClick}>Login</button>)
+                        (<button className='top-bar-button' onClick={handleMakePicksClick}>Make Picks</button>) :
+                        (<button className='top-bar-button' onClick={handleLoginClick}>Login</button>)
                     }
                 </div>
             </span>
+            <MakePicksForm visible={makePicksVisible} setVisibility={setMakePicksVisible}/>
             <GentLeaderboard />
         </div>
     )

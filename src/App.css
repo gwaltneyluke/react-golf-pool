@@ -3,6 +3,8 @@
   --secondary-color: white;
   --accent-color: yellow;
   --hover-color: rgb(255, 255, 150);
+  --close-color: red;
+  --close-hover-color: rgb(255, 0, 150);
 }
 
 * {
@@ -75,6 +77,63 @@ table.leaderboard-table > tbody > tr > th,
 table.leaderboard-table > tbody > tr > td {
   border: 1px solid var(--primary-color);
   border-collapse: collapse;
+}
+
+.make-picks-form {
+  background-color: var(--primary-color);
+  border: 3px solid var(--accent-color);
+  border-radius: 5px;
+  padding: 10px;
+  position: fixed;
+  z-index: 99;
+  left: 50%;
+  top: 50%;
+  height: auto;
+  width: 400px;
+  transform: translate(-50%, -50%);
+}
+
+.close-make-picks-form {
+  background-color: var(--close-color);
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.close-make-picks-form:hover {
+  background-color: var(--close-hover-color);
+}
+
+.close-make-picks-form:active {
+  background-color: var(--secondary-color);
+}
+
+.submit-make-picks-form {
+  background-color: var(--accent-color);
+  border: none;
+  border-radius: 5px;
+  color: var(--primary-color);
+  cursor: pointer;
+  padding: 10px 30px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.make-picks-table {
+  margin: 20px;
+  left: 50%;
+  right: 50%;
+}
+
+.make-picks-table-header > tr > th {
+  color: var(--secondary-color);
+}
+
+.make-picks-table-body > tr > td {
+  color: var(--primary-color);
 }
 
 table.leaderboard-table > tbody > tr:hover {
