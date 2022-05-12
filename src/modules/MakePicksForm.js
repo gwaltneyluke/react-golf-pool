@@ -35,19 +35,20 @@ const MakePicksForm = ({
                 </thead>
                 <tbody className='make-picks-table-body'>
                     {Array(numberOfPicks).fill(null).map((_, idx) => (
-                        <tr key={`pick-number-${idx}`}>
+                        <tr key={`pick-number-${idx+1}`}>
                             <td>
-                                <label>Pick #{idx}</label>
+                                <label>Pick #{idx+1}</label>
                             </td>
                             <td>
                                 <select>
+                                    <option value='none' selected='true'>---</option>
                                     {players.map((player) => (
                                         <option value={player}>{player}</option>
                                     ))}
                                 </select>
                             </td>
                             <td>
-                                <input type='text'></input>
+                                <input type='number' defaultValue='0'></input>
                             </td>
                         </tr>
                     ))}

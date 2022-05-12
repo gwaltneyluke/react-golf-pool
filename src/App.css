@@ -123,16 +123,18 @@ table.leaderboard-table > tbody > tr > td {
 }
 
 .make-picks-table {
-  margin: 20px;
+  margin: 30px;
   left: 50%;
   right: 50%;
+  width: 90%;
 }
 
 .make-picks-table-header > tr > th {
   color: var(--secondary-color);
 }
 
-.make-picks-table-body > tr > td {
+.make-picks-table-body > tr > td > select,
+.make-picks-table-body > tr > td > input {
   color: var(--primary-color);
 }
 
