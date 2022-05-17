@@ -2,7 +2,6 @@ service: golf-pool-api
 
 frameworkVersion: '2 || 3'
 
-
 provider:
   name: aws
   runtime: nodejs12.x
