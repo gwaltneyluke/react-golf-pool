@@ -55,6 +55,22 @@ resource "aws_dynamodb_table" "leaderboard_table" {
   }
 }
 
+resource "aws_ssm_parameter" "leaderboard_table_arn" {
+  name        = "/${local.resource_prefix}/leaderboard-table/arn"
+  type        = "String"
+  value       = aws_dynamodb_table.leaderboard_table.arn
+  description = "the ARN of the leaderboard table for the jimstick golf pool"
+  overwrite   = true
+}
+
+resource "aws_ssm_parameter" "leaderboard_table_name" {
+  name        = "/${local.resource_prefix}/leaderboard-table/name"
+  type        = "String"
+  value       = aws_dynamodb_table.leaderboard_table.name
+  description = "the name of the leaderboard table for the jimstick golf pool"
+  overwrite   = true
+}
+
 resource "aws_dynamodb_table" "picks_table" {
   name           = "${local.resource_prefix}-picks-table"
   billing_mode   = "PROVISIONED"
@@ -66,6 +82,22 @@ resource "aws_dynamodb_table" "picks_table" {
     name = "UserId"
     type = "S"
   }
+}
+
+resource "aws_ssm_parameter" "picks_table_arn" {
+  name        = "/${local.resource_prefix}/picks-table/arn"
+  type        = "String"
+  value       = aws_dynamodb_table.picks_table.arn
+  description = "the ARN of the picks table for the jimstick golf pool"
+  overwrite   = true
+}
+
+resource "aws_ssm_parameter" "picks_table_name" {
+  name        = "/${local.resource_prefix}/picks-table/name"
+  type        = "String"
+  value       = aws_dynamodb_table.picks_table.arn
+  description = "the name of the picks table for the jimstick golf pool"
+  overwrite   = true
 }
 
 ### cognito infrastructure
