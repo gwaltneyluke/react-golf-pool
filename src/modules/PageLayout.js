@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import GentLeaderboard from './GentLeaderboard';
 import MakePicksForm from './MakePicksForm';
 
-import { configureAuth, getUser, signIn } from '../service/authService'
+import { configureAuth, getUser, signIn, signOut } from '../service/authService'
 
 const defaultUser = {
     isSignedIn: false
@@ -29,6 +29,11 @@ function PageLayout() {
         setUser(user);
     }
 
+    const handleLogoutClick = async () => {
+        await signOut();
+        setUser(defaultUser);
+    }
+
     const handleMakePicksClick = () => {
         setMakePicksVisible(true);
     }
@@ -40,7 +45,10 @@ function PageLayout() {
                 <h1 className='top-bar-element title'>Hello, {user.isSignedIn ? user.firstName : 'friends'}</h1>
                 <div className='top-bar-element'>
                     {user.isSignedIn ? 
-                        (<button className='top-bar-button' onClick={handleMakePicksClick}>Make Picks</button>) :
+                        (<div>
+                            <button className='top-bar-button' onClick={handleLogoutClick}>Logout</button>
+                            <button className='top-bar-button' onClick={handleMakePicksClick}>Make Picks</button>
+                        </div>) :
                         (<button className='top-bar-button' onClick={handleLoginClick}>Login</button>)
                     }
                 </div>
