@@ -19,7 +19,19 @@ terraform {
 
 provider "aws" {
   profile = "default"
-  region  = "us-west-1"
+  region  = "us-east-1"
+}
+
+### variables
+
+variable "google_idp_client_id" {
+  type        = string
+  description = "Client ID for the Google Identity Provider"
+}
+
+variable "google_idp_client_secret" {
+  type        = string
+  description = "Client secret for the Google Identity Provider"
 }
 
 ### locals
@@ -57,3 +69,42 @@ resource "aws_dynamodb_table" "picks_table" {
 }
 
 ### cognito infrastructure
+
+resource "aws_cognito_user_pool" "user_pool" {
+  name = "${local.resource_prefix}-user-pool"
+}
+
+resource "aws_cognito_user_pool_domain" "user_pool_domain" {
+  domain       = local.resource_prefix
+  user_pool_id = aws_cognito_user_pool.user_pool.id
+}
+
+resource "aws_cognito_identity_provider" "google" {
+  user_pool_id  = aws_cognito_user_pool.user_pool.id
+  provider_name = "Google"
+  provider_type = "Google"
+
+  provider_details = {
+    authorize_scopes = "email profile openid"
+    client_id        = var.google_idp_client_id
+    client_secret    = var.google_idp_client_secret
+  }
+
+  attribute_mapping = {
+    email       = "email"
+    username    = "sub"
+    given_name  = "given_name"
+    family_name = "family_name"
+  }
+}
+
+resource "aws_cognito_user_pool_client" "app_client" {
+  name                                 = "${local.resource_prefix}-app-client"
+  user_pool_id                         = aws_cognito_user_pool.user_pool.id
+  callback_urls                        = [ "http://localhost:3000" ]
+  logout_urls                          = [ "http://localhost:3000/logout" ]
+  allowed_oauth_flows                  = [ "code" ]
+  allowed_oauth_scopes                 = [ "email", "profile", "openid" ]
+  allowed_oauth_flows_user_pool_client = true
+  supported_identity_providers         = [ aws_cognito_identity_provider.google.provider_name ]
+}

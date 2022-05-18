@@ -24,3 +24,6 @@ yarn-error.log*
 
 # Serverless directories
 .serverless
+
+# terraform directories
+.terraform*
