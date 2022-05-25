@@ -1,15 +1,13 @@
 'use strict';
 
-module.exports.handler = async (event) => {
+const { getOrderedLeaderboard } = require('./service/orderLeaderboard');
+
+module.exports.handler = async () => {
+  const orderedLeaderboard = await getOrderedLeaderboard();
+
+  console.log(`fetchLeaderboard.handler - end: ${orderedLeaderboard}`);
   return {
     statusCode: 200,
-    body: JSON.stringify(
-      {
-        message: 'Go Serverless v2.0! Your function executed successfully!',
-        input: event,
-      },
-      null,
-      2
-    ),
+    body: JSON.stringify(orderedLeaderboard),
   };
 };

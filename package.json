@@ -38,6 +38,7 @@
     ]
   },
   "devDependencies": {
-    "@faker-js/faker": "^6.2.0"
+    "@faker-js/faker": "^6.2.0",
+    "aws-sdk": "^2.1138.0"
   }
 }

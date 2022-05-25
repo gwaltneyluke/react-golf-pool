@@ -7,16 +7,18 @@ provider:
   region: ${opt:region, 'invalid'}
   runtime: nodejs12.x
   lambdaHashingVersion: 20201221
+  apiKeys:
+    - ${self:service}-key
   iam:
     role:
       statements:
         - Effect: 'Allow'
-          Resource: ${ssm:/jimstick-golf-pool/leaderboard-table/arn}
+          Resource: ${ssm:/jimstick-golf-pool/players-table/arn}
           Action:
             - 'dynamodb:PutItem'
             - 'dynamodb:Scan'
         - Effect: 'Allow'
-          Resource: ${ssm:/jimstick-golf-pooll/picks-table/arn}
+          Resource: ${ssm:/jimstick-golf-pool/gents-table/arn}
           Action:
             - 'dynamodb:PutItem'
             - 'dynamodb:Scan'
@@ -25,25 +27,26 @@ functions:
   fetchLeaderboard:
     handler: fetchLeaderboard.handler
     environment:
-      LEADERBOARD_TABLE: ${ssm:/jimstick-golf-pool/leaderboard-table/name}
-      PICKS_TABLE: ${ssm:/jimstick-golf-pool/picks-table/name}
+      PLAYERS_TABLE: ${ssm:/jimstick-golf-pool/players-table/name}
+      GENTS_TABLE: ${ssm:/jimstick-golf-pool/gents-table/name}
     events:
-      - httpApi:
+      - http:
           method: GET
           path: /leaderboard
-  placePicks:
-    handler: placePicks.handler
-    environment:
-      PICKS_TABLE: ${ssm:/jimstick-golf-pool/picks-table/name}
-    events:
-      - httpApi:
-          method: PUT
-          path: /picks
-  pollScores:
-    handler: pollScores.handler
-    environment:
-      LEADERBOARD_TABLE: ${ssm:/jimstick-golf-pool/leaderboard-table/name}
-    events:
-      - schedule:
-          rate: rate(5 minutes)
-          enabled: true
+          private: true
+  # placePicks:
+  #   handler: placePicks.handler
+  #   environment:
+  #     GENTS_TABLE: ${ssm:/jimstick-golf-pool/gents-table/name}
+  #   events:
+  #     - httpApi:
+  #         method: PUT
+  #         path: /picks
+  # pollScores:
+  #   handler: pollScores.handler
+  #   environment:
+  #     PLAYERS_TABLE: ${ssm:/jimstick-golf-pool/players-table/name}
+  #   events:
+  #     - schedule:
+  #         rate: rate(5 minutes)
+  #         enabled: true

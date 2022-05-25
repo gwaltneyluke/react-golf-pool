@@ -42,61 +42,61 @@ locals {
 
 ### dynamo tables
 
-resource "aws_dynamodb_table" "leaderboard_table" {
-  name           = "${local.resource_prefix}-leaderboard-table"
+resource "aws_dynamodb_table" "players_table" {
+  name           = "${local.resource_prefix}-players-table"
   billing_mode   = "PROVISIONED"
   read_capacity  = 3
   write_capacity = 1
-  hash_key       = "PlayerName"
+  hash_key       = "name"
 
   attribute {
-    name = "PlayerName"
+    name = "name"
     type = "S"
   }
 }
 
-resource "aws_ssm_parameter" "leaderboard_table_arn" {
-  name        = "/${local.resource_prefix}/leaderboard-table/arn"
+resource "aws_ssm_parameter" "players_table_arn" {
+  name        = "/${local.resource_prefix}/players-table/arn"
   type        = "String"
-  value       = aws_dynamodb_table.leaderboard_table.arn
-  description = "the ARN of the leaderboard table for the jimstick golf pool"
+  value       = aws_dynamodb_table.players_table.arn
+  description = "the ARN of the players table for the jimstick golf pool"
   overwrite   = true
 }
 
-resource "aws_ssm_parameter" "leaderboard_table_name" {
-  name        = "/${local.resource_prefix}/leaderboard-table/name"
+resource "aws_ssm_parameter" "players_table_name" {
+  name        = "/${local.resource_prefix}/players-table/name"
   type        = "String"
-  value       = aws_dynamodb_table.leaderboard_table.name
-  description = "the name of the leaderboard table for the jimstick golf pool"
+  value       = aws_dynamodb_table.players_table.name
+  description = "the name of the players table for the jimstick golf pool"
   overwrite   = true
 }
 
-resource "aws_dynamodb_table" "picks_table" {
-  name           = "${local.resource_prefix}-picks-table"
+resource "aws_dynamodb_table" "gents_table" {
+  name           = "${local.resource_prefix}-gents-table"
   billing_mode   = "PROVISIONED"
   read_capacity  = 3
   write_capacity = 1
-  hash_key       = "UserId"
+  hash_key       = "userId"
 
   attribute {
-    name = "UserId"
+    name = "userId"
     type = "S"
   }
 }
 
-resource "aws_ssm_parameter" "picks_table_arn" {
-  name        = "/${local.resource_prefix}/picks-table/arn"
+resource "aws_ssm_parameter" "gents_table_arn" {
+  name        = "/${local.resource_prefix}/gents-table/arn"
   type        = "String"
-  value       = aws_dynamodb_table.picks_table.arn
-  description = "the ARN of the picks table for the jimstick golf pool"
+  value       = aws_dynamodb_table.gents_table.arn
+  description = "the ARN of the gents table for the jimstick golf pool"
   overwrite   = true
 }
 
-resource "aws_ssm_parameter" "picks_table_name" {
-  name        = "/${local.resource_prefix}/picks-table/name"
+resource "aws_ssm_parameter" "gents_table_name" {
+  name        = "/${local.resource_prefix}/gents-table/name"
   type        = "String"
-  value       = aws_dynamodb_table.picks_table.arn
-  description = "the name of the picks table for the jimstick golf pool"
+  value       = aws_dynamodb_table.gents_table.name
+  description = "the name of the gents table for the jimstick golf pool"
   overwrite   = true
 }
 
