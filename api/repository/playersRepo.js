@@ -1,9 +1,10 @@
 'use strict';
 
 const aws = require('aws-sdk');
-const dynamo = new aws.DynamoDB.DocumentClient()
+const s3 = new aws.S3();
 
-const playersTable = process.env.PLAYERS_TABLE;
+const bucket = process.env.PLAYERS_BUCKET || 'jimstick-golf-pool-players-bucket';
+const key = 'players.json';
 
 /*
     Gets an array of players in the golf tournament
@@ -17,13 +18,23 @@ const playersTable = process.env.PLAYERS_TABLE;
       ...
     ]
 */
-const getPlayers = async () => {
-  let scanResult = await dynamo.scan({
-    TableName: playersTable
+const readPlayers = async () => {
+  let getObjectResponse = await s3.getObject({
+    Bucket: bucket,
+    Key: key
   }).promise();
-  return scanResult.Items;
+  return JSON.parse(getObjectResponse.Body);
+};
+
+const writePlayers = async (players) => {
+  await s3.putObject({
+    Bucket: bucket,
+    Key: key,
+    Body: JSON.stringify(players)
+  }).promise();
 }
 
 module.exports = {
-  getPlayers
+  readPlayers,
+  writePlayers
 };

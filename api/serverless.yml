@@ -13,10 +13,10 @@ provider:
     role:
       statements:
         - Effect: 'Allow'
-          Resource: ${ssm:/jimstick-golf-pool/players-table/arn}
+          Resource: ${ssm:/jimstick-golf-pool/players-bucket/arn}
           Action:
-            - 'dynamodb:PutItem'
-            - 'dynamodb:Scan'
+            - 's3:GetObject'
+            - 's3:PutObject'
         - Effect: 'Allow'
           Resource: ${ssm:/jimstick-golf-pool/gents-table/arn}
           Action:
@@ -27,8 +27,8 @@ functions:
   fetchLeaderboard:
     handler: fetchLeaderboard.handler
     environment:
-      PLAYERS_TABLE: ${ssm:/jimstick-golf-pool/players-table/name}
       GENTS_TABLE: ${ssm:/jimstick-golf-pool/gents-table/name}
+      PLAYERS_BUCKET: ${ssm:/jimstick-golf-pool/players-bucket/name}
     events:
       - http:
           method: GET
@@ -42,11 +42,11 @@ functions:
   #     - httpApi:
   #         method: PUT
   #         path: /picks
-  # pollScores:
-  #   handler: pollScores.handler
-  #   environment:
-  #     PLAYERS_TABLE: ${ssm:/jimstick-golf-pool/players-table/name}
-  #   events:
-  #     - schedule:
-  #         rate: rate(5 minutes)
-  #         enabled: true
+  pollScores:
+    handler: pollScores.handler
+    environment:
+      PLAYERS_BUCKET: ${ssm:/jimstick-golf-pool/players-bucket/name}
+    # events:
+    #   - schedule:
+    #       rate: rate(5 minutes)
+    #       enabled: true

@@ -1,19 +1,15 @@
 'use strict';
 
 const { getGents } = require('../repository/gentsRepo');
-const { getPlayers } = require('../repository/playersRepo');
+const { readPlayers } = require('../repository/playersRepo');
 
 const scoringPosition = process.env.SCORING_POSITION || 3;
 
 const getOrderedLeaderboard = async () => {
   console.log(`orderLeaderboard.getOrderedLeaderboard - start`);
   const gents = await getGents();
-  const players = await getPlayers();
-
-  console.log(`orderLeaderboard.getOrderedLeaderboard - gents: ${JSON.stringify(gents)}`);
-  console.log(`orderLeaderboard.getOrderedLeaderboard - players: ${JSON.stringify(players)}`);
+  const players = await readPlayers();
   const mappedGents = _mapGents(gents, players);
-  console.log(`orderLeaderboard.getOrderedLeaderboard - mapped gents: ${JSON.stringify(mappedGents)}`);
   return _orderLeaderboard(mappedGents);
 };
 

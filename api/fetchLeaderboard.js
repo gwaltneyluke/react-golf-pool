@@ -3,8 +3,8 @@
 const { getOrderedLeaderboard } = require('./service/orderLeaderboard');
 
 module.exports.handler = async () => {
+  console.log(`fetchLeaderboard.handler - start: ${orderedLeaderboard}`);
   const orderedLeaderboard = await getOrderedLeaderboard();
-
   console.log(`fetchLeaderboard.handler - end: ${orderedLeaderboard}`);
   return {
     statusCode: 200,

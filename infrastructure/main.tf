@@ -42,32 +42,23 @@ locals {
 
 ### dynamo tables
 
-resource "aws_dynamodb_table" "players_table" {
-  name           = "${local.resource_prefix}-players-table"
-  billing_mode   = "PROVISIONED"
-  read_capacity  = 3
-  write_capacity = 1
-  hash_key       = "name"
-
-  attribute {
-    name = "name"
-    type = "S"
-  }
+resource "aws_s3_bucket" "players_bucket" {
+  bucket = "${local.resource_prefix}-players-bucket"
 }
 
-resource "aws_ssm_parameter" "players_table_arn" {
-  name        = "/${local.resource_prefix}/players-table/arn"
+resource "aws_ssm_parameter" "players_bucket_arn" {
+  name        = "/${local.resource_prefix}/players-bucket/arn"
   type        = "String"
-  value       = aws_dynamodb_table.players_table.arn
-  description = "the ARN of the players table for the jimstick golf pool"
+  value       = aws_s3_bucket.players_bucket.arn
+  description = "the ARN of the players bucket for the jimstick golf pool"
   overwrite   = true
 }
 
 resource "aws_ssm_parameter" "players_table_name" {
-  name        = "/${local.resource_prefix}/players-table/name"
+  name        = "/${local.resource_prefix}/players-bucket/name"
   type        = "String"
-  value       = aws_dynamodb_table.players_table.name
-  description = "the name of the players table for the jimstick golf pool"
+  value       = aws_s3_bucket.players_bucket.id
+  description = "the name of the players bucket for the jimstick golf pool"
   overwrite   = true
 }
 
