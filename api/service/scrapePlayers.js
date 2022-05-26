@@ -1,10 +1,15 @@
-const puppeteer = require('puppeteer');
+const chromium = require('chrome-aws-lambda');
 
 const cbsUrl = process.env.CBS_URL || 
   'https://www.cbssports.com/golf/leaderboard/';
 
 const scrapePlayers = async () => {
-  const browser = await puppeteer.launch();
+  const browser = await chromium.puppeteer.launch({
+    args: chromium.args,
+    defaultViewport: chromium.defaultViewport,
+    executablePath: await chromium.executablePath,
+    ignoreHTTPSErrors: true,
+  })
   const page = await browser.newPage();
   await page.goto(cbsUrl);
 
