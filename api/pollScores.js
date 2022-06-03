@@ -1,4 +1,4 @@
-const { writePlayers } = require("./repository/playersRepo");
+const { writePlayers } = require("./service/repository/playersRepo");
 const { scrapePlayers } = require("./service/scrapePlayers");
 
 const handler = async () => {

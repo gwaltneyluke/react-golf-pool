@@ -10,11 +10,16 @@ provider:
   apiGateway:
     apiKeys:
       - ${self:service}-key
+  ecr:
+    images:
+      pollscoresimage:
+        path: ./
+        file: pollScores.Dockerfile
   iam:
     role:
       statements:
         - Effect: 'Allow'
-          Resource: ${ssm:/jimstick-golf-pool/players-bucket/arn}
+          Resource: ${ssm:/jimstick-golf-pool/players-bucket/arn}/*
           Action:
             - 's3:GetObject'
             - 's3:PutObject'
@@ -44,9 +49,12 @@ functions:
   #         method: PUT
   #         path: /picks
   pollScores:
-    handler: pollScores.handler
+    image:
+      name: pollscoresimage
     environment:
       PLAYERS_BUCKET: ${ssm:/jimstick-golf-pool/players-bucket/name}
+    memorySize: 1024
+    timeout: 30
     # events:
     #   - schedule:
     #       rate: rate(5 minutes)

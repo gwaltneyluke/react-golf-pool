@@ -34,9 +34,28 @@ const scrapePlayers = async () => {
     return players;
   });
 
-  console.log(playerScores);
+  const playerLeaderboard = playerScores.map(p => {
+    return {
+      ...p,
+      position: _getPositionInteger(p.position),
+      displayPosition: p.position
+    }
+  });
+  console.log(playerLeaderboard);
   browser.close();
-  return playerScores;
+  return playerLeaderboard;
+}
+
+const _getPositionInteger = (position) => {
+  let positionInt = parseInt(position);
+
+  if (positionInt) {
+    return positionInt;
+  } else if (position[0] === 'T') {
+    return parseInt(position.slice(1))
+  } else {
+    return 999;
+  }
 }
 
 module.exports = {

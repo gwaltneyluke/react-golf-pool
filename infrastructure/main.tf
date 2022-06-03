@@ -54,7 +54,7 @@ resource "aws_ssm_parameter" "players_bucket_arn" {
   overwrite   = true
 }
 
-resource "aws_ssm_parameter" "players_table_name" {
+resource "aws_ssm_parameter" "players_bucket_name" {
   name        = "/${local.resource_prefix}/players-bucket/name"
   type        = "String"
   value       = aws_s3_bucket.players_bucket.id

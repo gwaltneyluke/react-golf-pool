@@ -1,7 +1,7 @@
 'use strict';
 
-const { getGents } = require('../repository/gentsRepo');
-const { readPlayers } = require('../repository/playersRepo');
+const { getGents } = require('./repository/gentsRepo');
+const { readPlayers } = require('./repository/playersRepo');
 
 const scoringPosition = process.env.SCORING_POSITION || 3;
 
@@ -34,7 +34,8 @@ const _mapGents = (gents, players) => {
       return {
         ...pick,
         score: pickPlayer ? pickPlayer.score : '-',
-        position: pickPlayer ? pickPlayer.position: '-' 
+        position: pickPlayer ? pickPlayer.position: '-',
+        displayPosition: pickPlayer ? pickPlayer.displayPosition : '-'
       };
     });
 
